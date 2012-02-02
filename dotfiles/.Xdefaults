@@ -1,0 +1,60 @@
+Xcursor.theme: DMZ-white
+Xft.dpi: 96
+Xft.antialias:      true
+Xft.hinting:      true
+
+! Xterm settings
+
+XTerm*dynamicColors:      true
+XTerm*geometry:           100x25
+XTerm*toolBar:             false
+XTerm*utf8 :              1
+XTerm*faceName:      terminus:pixelsize=9
+
+
+!URxvt
+
+URxvt.saveLines: 8192
+URxvt.cursorBlink:        true 
+URxvt.foreground:    #FFFFFF
+URxvt.background:    #000000
+URxvt.scrollBar: false
+URxvt.title: URXVT
+URxvt.geometry:         100x25
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: epiphany
+URxvt.matcher.button: 1
+URxvt.colorUL:            #86a2be
+URxvt.internalBorder:     0
+URxvt.underlineColor:     #86a2be
+URxvt.scrollstyle:      plain
+URxvt.font: xft:terminus
+URxvt.termName: rxvt
+URxvt*iconFile: /usr/share/icons/gnome/22x22/apps/terminal.png
+URxvt.loginShell: true
+
+!Xcalc
+
+*Form.background: gray40
+*Command.background: gray
+*xcalc*screen*background: rgb:f/e/8
+*xcalc*button22.background: white
+*xcalc*button23.background: white
+*xcalc*button24.background: white
+*xcalc*button27.background: white
+*xcalc*button28.background: white
+*xcalc*button29.background: white
+*xcalc*button32.background: white
+*xcalc*button33.background: white
+*xcalc*button34.background: white
+*xcalc*button37.background: white
+*xcalc*button38.background: white
+*xcalc*button39.background: white
+*xcalc*button20.background: rgb:e/a/7
+*xcalc*button25.background: rgb:e/a/7
+*xcalc*button30.background: rgb:e/a/7
+*xcalc*button35.background: rgb:e/a/7
+*xcalc*button40.background: rgb:e/a/7
+! GVim
+
+Vim*reverseVideo: true
