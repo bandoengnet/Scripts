@@ -14,42 +14,44 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/gpl-3.0.html
 #  for the full license.
 
-# This program was written by Dominic Hosler dom@dominichosler.co.uk
-# There is a description of how it works on my blog http://dominichosler.wordpress.com
-# Please ask on the blog if you have any questions, thank you.
 
-#setup song count so order is preserved
+function usage {
+    echo ""
+    echo "`basename $0` [-r] playlist.m3u dest_folder"
+    echo "  -r  rename all files in ####.mp3"
+}
+
 count=0
 
-#necessary to fill an array first, because ffmpeg messes with the standard input and output.
-#It is not the waiting that is the problem, it is ffmpeg using the input and output that removes
-# the next so much of the input lines, however if all the input is done into an array before
-# ffmpeg is called, it runs perfectly.
+eval set -- $(getopt -n $0 -o "-r" -- "$@")
 
-EXPECTED_ARGS=2
-E_BADARGS=65
+rename=0
+declare -a files
+while [ $# -gt 0 ] ; do
+            case "$1" in
+                -r) rename=1 ; shift ;;
+                --) shift ;;
+                -*) echo "bad option '$1'";usage ; exit 1 ;;
+                *) files=("${files[@]}" "$1") ; shift ;;
+            esac
+done
 
-if [ $# -ne $EXPECTED_ARGS ]
-then
-      echo "Usage: `basename $0` playlist.m3u destination_folder"
-      exit $E_BADARGS
+if [ ${#files[@]} -ne 2 ] ; then
+     echo "Playlist and output dir are required."
+     usage
+     exit 1
 fi
 
+playlist="${files[0]}"
 
-#store old IFS so can return it at the end
-old_IFS=$IFS
-#set IFS to newline
-IFS=$'\n'
-#store an array filled with each line of the file.
-lines=($(cat $1)) # array
-#replace the old IFS
-IFS=$old_IFS
+dest_folder="${files[1]}"
 
-dest_folder=$2
+IFS=$'\r\n' lines=($(cat ${playlist})) # array
 
 if [ ! -d $dest_folder ]; then
-      echo "Usage: `basename $0` playlist.m3u destination_folder"
-      exit $E_BADARGS
+      echo $dest_folder" is not a folder"
+      usage
+      exit 1
 fi
 
 #find size of file
@@ -103,19 +105,28 @@ do
      
      count=$((count+1))
      countstr=$(printf "%04d" $count)
-     
+
+
+    if [ $rename == 1 ] ; then
+         newfilename="${dest_folder}/${countstr}.mp3"
+     else
+         newfilename="${dest_folder}/${countstr}_${filename%\.*}.mp3"
+     fi
+
      if [[ ${lines[$i]} == *mp3 ]]
      then
-         echo "copying file "${filename}" to "${countstr}_${filename}
-         cp "${lines[$i]}" "${dest_folder}/${countstr}_${filename}"
+
+         echo "copying file "${filename}" to "${newfilename}
+         cp "${lines[$i]}" "${newfilename}"
      fi
      
      if [[ ${lines[$i]} == *m4a ]]
      then
     
-         echo "converting file "${filename}" to "${dest_folder}"/"${countstr}"_"${filename%\.*}".mp3"
+         echo "converting file "${filename}" to "$newfilename
          
-         avconv -y -i "${lines[$i]}" -acodec libmp3lame -ab 192k "${dest_folder}/${countstr}_${filename%\.*}.mp3" &> /dev/null  &
+         avconv -y -i "${lines[$i]}" -acodec libmp3lame -ab 192k "${newfilename}" &> /dev/null  &
          wait $!;
      fi
 done
+
