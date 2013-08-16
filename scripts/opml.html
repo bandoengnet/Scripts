@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<title>OPML 2 HTML via JS</title>
+<script type="text/javascript" src="opml.js" ></script>
+
+</head>
+<body>
+
+<form action="">
+<textarea onclick="this.select()" style="width: 100%; height: 200px;" id="opmlText">
+
+</textarea>
+<br />
+<input
+    type="button"
+    value="Parse"
+    onclick="document.getElementById('result').innerHTML = opml2htmlParser.parse(this.form.elements[0].value)" />
+</form>
+<a
+    onclick="opml2htmlParser.exportAndSave(document.getElementById('opmlText').value)" >Export</a>
+<div id="result">&nbsp;</div>
+</body>
+</html>

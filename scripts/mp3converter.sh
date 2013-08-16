@@ -14,6 +14,12 @@
 #  along with this program.  If not, see http://www.gnu.org/licenses/gpl-3.0.html
 #  for the full license.
 
+EFAULT_OUTPUT_DIR=/tmp/mp3ify
+QUALITY=2
+VBR_QUALITY=4
+MIN_BITRATE=64
+MAX_BITRATE=256
+SAMPLE_FREQ=44.1
 
 function usage {
     echo ""
@@ -113,6 +119,9 @@ do
          newfilename="${dest_folder}/${countstr}_${filename%\.*}.mp3"
      fi
 
+     if [ ! -f ${newfilename} ]
+     then
+
      if [[ ${lines[$i]} == *mp3 ]]
      then
 
@@ -125,8 +134,28 @@ do
     
          echo "converting file "${filename}" to "$newfilename
          
-         avconv -y -i "${lines[$i]}" -acodec libmp3lame -ab 192k "${newfilename}" &> /dev/null  &
-         wait $!;
+         #avconv -y -i "${lines[$i]}" -acodec libmp3lame -ab 192k "${newfilename}" & #&> /dev/null  &
+
+         #ffmpeg -i "${lines[$i]}" -acodec libmp3lame -ab 192k "${newfilename}" &
+         
+         rm -f tmp.wav
+         ffmpeg -i "${lines[$i]}" tmp.wav
+
+         lame -m j -q $QUALITY -v -V $VBR_QUALITY -b $MIN_BITRATE \
+                          -B $MAX_BITRATE -s $SAMPLE_FREQ tmp.wav "${newfilename}"
+
+         python2 -c "
+import mutagen
+input = mutagen.File(\"${lines[$i]}\", easy = True)
+output = mutagen.File(\"${newfilename}\", easy = True)
+for tag in [ 'artist', 'album', 'tracknumber', 'genre', 'title' ]:
+    value = input.get(tag)
+    if value: output[tag] = value[0]
+output.save(v1=2)"
+         
+         
+         #wait $!;
      fi
+ fi
 done
 

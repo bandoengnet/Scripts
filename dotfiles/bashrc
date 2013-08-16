@@ -96,3 +96,7 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 EDITOR=vim
+
+export PATH=/home/mua/Software/play-1.2.5:/home/mua/bin/Sencha/Cmd/3.1.0.256:$PATH
+
+export SENCHA_CMD_3_0_0="/home/mua/bin/Sencha/Cmd/3.1.0.256"

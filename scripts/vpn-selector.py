@@ -9,9 +9,9 @@ os.system("clear")
 if (len(sys.argv) > 1):
 	argspath = sys.argv[1]
 	if os.path.isdir(argspath) == True:
-		path = argspath;
+		path = argspath
 	else:
-		print "The paramente isn't a folder"
+		print ("The paramente isn\'t a folder")
 
 dirList=os.listdir(path)
 
@@ -30,7 +30,7 @@ for filename in dirList:
 i=0
 for vpn in vpns:
 	i=i+1
-	print str(i)+")"+" "+vpn[0] + " - " + vpn[2][:-5]
+	print (str(i)+")"+" "+vpn[0] + " - " + vpn[2][:-5])
 
 
 fd = sys.stdin.fileno()
@@ -50,4 +50,4 @@ try:
 	args="--config "+ str(vpns[selection-1][2])
 	subprocess.call(["sudo openvpn " + args], shell=True)
 except:
-	print "Wrong selection"
+	print ("Wrong selection")
