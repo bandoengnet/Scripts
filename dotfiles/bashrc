@@ -89,14 +89,16 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-EDITOR=vim
+export SENCHA_CMD_3_0_0="$HOME/bin/Sencha/Cmd/3.1.0.256"
 
-export PATH=/home/mua/Software/play-1.2.5:/home/mua/bin/Sencha/Cmd/3.1.0.256:$PATH
+export EDITOR=vim
 
-export SENCHA_CMD_3_0_0="/home/mua/bin/Sencha/Cmd/3.1.0.256"
+export PATH=$HOME/Software/play-1.2.5:$HOME/bin/Sencha/Cmd/3.1.0.256:$PATH
+
+
+

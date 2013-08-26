@@ -38,6 +38,11 @@ set shiftwidth=4
 set expandtab
 set incsearch
 
+augroup filetypedetect
+  " Mail
+  autocmd BufRead,BufNewFile *mutt-*              setfiletype mail
+augroup END
+
 set ruler
 highlight BadWhitespace ctermbg=red guibg=red
 set laststatus=2
