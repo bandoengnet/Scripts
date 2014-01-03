@@ -1,6 +1,9 @@
 #!/usr/bin/python
 
 import os,sys,termios,tty,subprocess
+
+from sys import exit
+
 path=os.getenv("HOME")+"/Documents/OpenVPN"
 
 
@@ -14,6 +17,7 @@ if (len(sys.argv) > 1):
 		print ("The paramente isn\'t a folder")
 
 dirList=os.listdir(path)
+dirList.sort()
 
 vpns=[]
 
@@ -33,18 +37,16 @@ for vpn in vpns:
 	print (str(i)+")"+" "+vpn[0] + " - " + vpn[2][:-5])
 
 
-fd = sys.stdin.fileno()
-old_settings = termios.tcgetattr(fd)
-ch=''
-try:
-	tty.setraw(sys.stdin.fileno())
-	ch = sys.stdin.read(1)
-finally:
-	termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-	
+ch=""
+ch = raw_input("Select your conection (q exit): ");
+
+if (ch == "q"):
+	print "Exit"
+	sys.exit()
 
 try:
 	selection=int(ch)
+	print (selection)
 	path=str(vpns[selection-1][1])
 	os.chdir(path)
 	args="--config "+ str(vpns[selection-1][2])

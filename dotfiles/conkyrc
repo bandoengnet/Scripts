@@ -47,7 +47,7 @@ total_run_times 0
 own_window yes
 
 # If own_window is yes, you may use type normal, desktop or overide
-own_window_type dock
+own_window_type desktop
 
 # Use pseudo transparency with own_window?
 own_window_transparent yes
@@ -58,8 +58,8 @@ own_window_transparent yes
 own_window_class conky
 
 # If own_window is yes, these window manager hints may be used
-own_window_hints undecorated,below,stiky,skip_taskbar,skip_pager
-own_window_hints below
+#own_window_hints undecorated,below,stiky,skip_taskbar,skip_pager
+#own_window_hints below
 # Use double buffering (reduces flicker, may not work for everyone)
 double_buffer no
 
@@ -79,7 +79,7 @@ draw_borders no
 stippled_borders 8 no
 
 # border margins
-border_margin 4
+#border_margin 4
 
 # border width
 border_width 1
@@ -120,7 +120,7 @@ override_utf8_locale no
 
 
 # Add spaces to keep things from moving about?  This only affects certain objects.
-use_spacer no
+use_spacer none
 
 #   mldonkey_hostname     Hostname for mldonkey stuff, defaults to localhost
 #   mldonkey_port         Mldonkey port, 4001 default

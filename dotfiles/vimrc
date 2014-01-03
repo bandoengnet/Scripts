@@ -24,7 +24,7 @@ filetype plugin indent on
 " differently from regular Vi. They are highly recommended though.
 set showcmd		" Show (partial) command in status line.
 set showmatch		" Show matching brackets.
-set mouse=a		" Enable mouse usage (all modes)
+"set mouse=a		" Enable mouse usage (all modes)
 set autoread
 set ignorecase
 set hlsearch
@@ -35,7 +35,7 @@ set so=7
 set tabstop=4
 set softtabstop=0
 set shiftwidth=4
-set expandtab
+"unset expandtab
 set incsearch
 
 augroup filetypedetect
@@ -56,3 +56,7 @@ autocmd FileType css set omnifunc=csscomplete#CompleteCSS
 
 set number
 highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
+
+" colorscheme desertEx
+
+" color desertEx

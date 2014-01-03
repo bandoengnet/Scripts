@@ -1,4 +1,8 @@
 # If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 [ -z "$PS1" ] && return
 
 HISTCONTROL=ignoreboth
@@ -94,11 +98,11 @@ if [ -d "$HOME/bin" ] ; then
     PATH="$HOME/bin:$PATH"
 fi
 
-export SENCHA_CMD_3_0_0="$HOME/bin/Sencha/Cmd/3.1.0.256"
+export SENCHA_CMD_3_0_0="/data/mua/Software/Sencha/Cmd/4.0.1.45"
 
 export EDITOR=vim
 
-export PATH=$HOME/Software/play-1.2.5:$HOME/bin/Sencha/Cmd/3.1.0.256:$PATH
+#export PATH=/home/mua/Software/Sencha/Cmd/3.1.3.372:$PATH
 
 
-
+export PATH=/data/mua/Software/Sencha/Cmd/4.0.1.45:$PATH
